@@ -3,13 +3,123 @@
 <head>
 <meta charset="utf-8">
 <title>Video for Lab Automation</title>
+<link href="https://unpkg.com/video.js/dist/video-js.min.css" rel="stylesheet">
+<link href="https://unpkg.com/videojs-playlist-ui/dist/videojs-playlist-ui.css" rel="stylesheet">    
+<style>
+    	.vjs-paused .vjs-big-play-button,.vjs-paused.vjs-has-started .vjs-big-play-button {
+		    display: block;
+		}
+		
+		.video-js .vjs-big-play-button{
+		    font-size: 2.5em;
+		    line-height: 2.3em;
+		    height: 2.5em;
+		    width: 2.5em;
+		    -webkit-border-radius: 2.5em;
+		    -moz-border-radius: 2.5em;
+		    border-radius: 2.5em;
+		    background-color: #73859f;
+		    background-color: rgba(115,133,159,.5);
+		    border-width: 0.15em;
+		    margin-top: -1.25em;
+		    margin-left: -1.75em;
+		}
+		.vjs-big-play-button .vjs-icon-placeholder {
+		    font-size: 1.63em;
+		}
+		.vjs-loading-spinner {
+		    font-size: 2.5em;
+		    width: 2em;
+		    height: 2em;
+		    border-radius: 1em;
+		    margin-top: -1em;
+		    margin-left: -1.5em;
+		}
+		
+		
+  </style>
+  <style>
+  	.player-container{
+	    background: #1a1a1a;
+    	overflow: auto;
+  	}
+  	.video-js{
+  		float:left;
+  		width: 85% !important;
+  		height: 720px;
+  	}
+  	.vjs-playlist{
+  		float:left;
+  		width: 15%;
+  		height: 720px;
+  	}
+  	.vjs-playlist-item{
+  		border: 1px solid #FFFFFF;
+  	}
+  	.vjs-playlist .vjs-selected{
+  		border: 1px solid #00FF00;
+  	}
+  	.vjs-playlist .vjs-selected img{
+  		opacity: .5;
+  	}
+  </style>
 </head>
 <body>
-    <p>Scheduler & 3D Simulation</p>
-	<video controls autoplay="true" preload="auto">
-		<source src="auto.mp4" type="video/mp4" />
-		<source src="AGV.mp4" type="video/mp4" />
-		<source src="na.mp4" type="video/mp4" />
+	<video
+    id="my-player"
+    class="video-js  vjs-default-skin vjs-big-play-centered vjs-v7 vjs-user-active"
+    data-setup='{}' controls autoplay="true" preload="auto">
 	</video>
+	<!-- The playlist menu will be built automatically in here -->
+	<div class="vjs-playlist playlist-container"></div>
+<script src="https://unpkg.com/video.js/dist/video.min.js"></script>
+<script src="https://unpkg.com/videojs-playlist/dist/videojs-playlist.min.js"></script>
+<script src="https://unpkg.com/videojs-playlist-ui/dist/videojs-playlist-ui.min.js"></script>
+<script>
+	var options = {};
+	const player = videojs('my-player');    
+	player.playlist([
+		{
+		  name: 'scheduler & 3D simulation',
+		  description: 'Abc.',
+		  duration: 134,
+		  sources: [
+			{ src: 'auto.mp4', type: 'video/mp4' }
+		  ],
+		  thumbnail: [
+			{
+			  src: 'images/scheduler.png'
+			}
+		  ]
+		},
+		{
+		  name: 'AGV and robot',
+		  description: 'Abc.',
+		  duration: 30,
+		  sources: [
+			{ src: 'AGV.mp4', type: 'video/mp4' }
+		  ],
+		  thumbnail: [
+			{
+			  src: 'images/agv.png'
+			}
+		  ]
+		},
+		{
+		  name: 'lab automation',
+		  description: 'Abc.',
+		  duration: 112,
+		  sources: [
+			{ src: 'na.mp4', type: 'video/mp4' }
+		  ],
+		  thumbnail: [
+			{
+			  src: 'images/na.png'
+			}
+		  ]
+		}
+	]);
+	player.playlistUi();
+</script>
 </body>
 </html>
